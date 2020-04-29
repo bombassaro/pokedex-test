@@ -1,5 +1,7 @@
 # PokeCards-test
 
+![alt text](./INTRO.gif)
+
 Para instalar o projeto:
 ```
 yarn install
