@@ -1,0 +1,166 @@
+$color-black: black;
+$color-white: white;
+$color-blue: #2773ba;
+$color-blue2: #1c356e;
+$color-yellow: #ffcd00;
+
+// keyframes
+@keyframes open-card {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+// mixins
+@mixin animation($o, $name, $duration, $delay) {
+  opacity: $o;
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-delay: $delay;
+}
+@mixin fx($n1, $n2) {
+  display: flex;
+  flex-direction: row;
+  align-items: $n1;
+  justify-content: $n2;
+}
+@mixin fy($n1, $n2) {
+  display: flex;
+  flex-direction: column;
+  align-items: $n1;
+  justify-content: $n2;
+}
+// rules
+body {
+  background-color: $color-black;
+  color: $color-white;
+  font-size: 28px;
+  font-family: 'VT323', cursive;
+  padding: 0px;
+  margin: 0px;
+  & > div {
+    @include fx(center, center);
+    width: 100%;
+  }
+}
+* {
+  list-style: none;
+}
+.container {
+  @include fy(center, center);
+  padding-bottom: 40px;
+  max-width: 720px;
+  width: 100%;
+  .logo {
+    margin-bottom: 40px;
+    margin-top: 40px;
+    width: calc(100% - 40px);
+  }
+  // @media(min-width: 720px) {
+    // @include fx(center, space-between);
+    // flex-wrap: wrap;
+  // }
+}
+.item {
+  @include fy(center, space-between);
+  width: calc(100% - 120px);
+  @media(min-width: 720px) {
+    width: calc(50% - 20px);
+  }
+}
+.card {
+  // @include fx(center, center);
+  @include animation(0, open-card, 1s, 0s);
+
+  border: 6px solid $color-blue;
+  background-color: $color-white;
+  border-radius: 10px;
+  color: $color-black;
+  margin-top: 20px;
+  width: calc(100%);
+  h1 {
+    font-size: 24px;
+    text-align: center;
+  }
+  .title {
+    @include fx(center, space-between);
+    margin-left: 20px;
+    width: calc(100% - 40px);
+  }
+  .attributes {
+    @include fy(center, flex-start);
+    margin-bottom: 10px;
+    margin-left: 20px;
+    width: calc(100% - 40px);
+    li {
+      @include fx(center, space-between);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      width: 100%;
+    }
+  }
+  @media(min-width: 420px) {
+    h1 {
+      font-size: 36px;
+    }
+  }
+  @media(min-width: 720px) {
+    h1 {
+      font-size: 48px;
+    }
+  }
+}
+.button {
+  @include animation(0, open-card, 1s, 0s);
+  @include fx(center, center);
+  border: 6px solid $color-blue;
+  background-color: $color-blue;
+  border-radius: 6px;
+  cursor: pointer;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-top: 10px;
+  width: 100%;
+  &:hover {
+    border: 6px solid $color-yellow;
+  }
+}
+.modal {
+  @include fx(center, center);
+  background-color: rgba(0,0,0,0.6);
+  position: fixed;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  z-index: 10;
+  .listview {
+    background-color: $color-white;
+    max-height: calc(100vh - 120px);
+    max-width: 360px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    width: calc(100% - 80px);
+    overflow-y: scroll;
+    // width: 100%;
+    .item {
+      @include fx(center, flex-start);
+      border-bottom: 1px solid rgba(0,0,0,0.2);
+      cursor: pointer;
+      color: $color-black;
+      padding: 10px 20px;
+      width: 100%;
+      &:hover {
+        background-color: rgba(0,0,0,0.05);
+      }
+    }
+    p {
+      margin: 0px;
+    }
+  }
+}
+.modal.close {
+  display: none;
+}
